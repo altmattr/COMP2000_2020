@@ -1,10 +1,12 @@
 import javax.swing.*;
+
 import java.awt.*;
+import java.awt.event.*;
 
 class Main extends JFrame {
-    
+
     class App extends JPanel {
-        
+
         Stage stage;
 
         public App() {
@@ -19,22 +21,29 @@ class Main extends JFrame {
 
     }
 
+    final App canvas;
+
     public static void main(String[] args) throws Exception {
         Main window = new Main();
         window.run();
     }
 
     private Main() {
+        super("Grid");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        App canvas = new App();
+        canvas = new App();
         this.setContentPane(canvas);
         this.pack();
         this.setVisible(true);
     }
 
     public void run() {
-        while (true) {
-            this.repaint();
-        }
+        // updates the window only when the mouse moves
+        this.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                canvas.repaint();
+            }
+        });
     }
 }
