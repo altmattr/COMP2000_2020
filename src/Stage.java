@@ -97,7 +97,7 @@ public class Stage {
                         currentState = State.SelectingNewLocation;
                     }
                 }
-                if(actorInAction.isEmpty()){
+                if(!actorInAction.isPresent()){
                     currentState = State.SelectingMenuItem;
                     menuOverlay.add(new MenuItem("Oops", x, y, () -> currentState = State.ChoosingActor));
                     menuOverlay.add(new MenuItem("End Turn", x, y+MenuItem.height, () -> currentState = State.CPUMoving));
