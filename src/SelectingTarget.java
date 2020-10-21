@@ -10,6 +10,7 @@ public class SelectingTarget implements GameState {
                 Optional<Actor> oa = s.actorAt(c);
                 if (oa.isPresent()){
                     oa.get().makeRedder(0.1f);
+                    Health.decrement();
                 }
             }
         }

@@ -14,8 +14,10 @@ public class ChoosingActor implements GameState {
         }
         if(!s.actorInAction.isPresent()){
             s.currentState = new SelectingMenuItem();
-            s.menuOverlay.add(new MenuItem("Oops", x, y, () -> s.currentState = new ChoosingActor()));
-            s.menuOverlay.add(new MenuItem("End Turn", x, y+MenuItem.height, () -> s.currentState = new CPUMoving()));
+            if(!Health.depleted()) {
+                s.menuOverlay.add(new MenuItem("Oops", x, y, () -> s.currentState = new ChoosingActor()));
+                s.menuOverlay.add(new MenuItem("End Turn", x, y+MenuItem.height, () -> s.currentState = new CPUMoving()));
+            }
             s.menuOverlay.add(new MenuItem("End Game", x, y+MenuItem.height*2, () -> System.exit(0)));
         }
     }

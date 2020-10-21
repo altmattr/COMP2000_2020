@@ -5,14 +5,14 @@
             "name": "CodeLens (Launch) - Main",
             "request": "launch",
             "mainClass": "Main",
-            "projectName": "comp229_2019"
+            "projectName": "comp2000_2020"
         },
         {
             "type": "java",
             "name": "CodeLens (Launch) - App",
             "request": "launch",
             "mainClass": "App",
-            "projectName": "comp229_2019"
+            "projectName": "comp2000_2020"
         }
     ]
 }

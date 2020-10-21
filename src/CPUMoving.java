@@ -9,11 +9,9 @@ public class CPUMoving implements GameState {
     @Override
     public void paint(Graphics g, Stage s) {
         for(Actor a: s.actors){
-            if (!a.isTeamRed()){
+            if (!a.isTeamRed()) {
                 List<Cell> possibleLocs = s.getClearRadius(a.loc, a.moves, true);
-
                 Cell nextLoc = a.strat.chooseNextLoc(possibleLocs);
-
                 a.setLocation(nextLoc);
             }
         }

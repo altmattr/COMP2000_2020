@@ -18,6 +18,7 @@ public class Stage {
         cellOverlay = new ArrayList<Cell>();
         menuOverlay = new ArrayList<MenuItem>();
         currentState = new ChoosingActor();
+        Health.set(10);
     }
 
     public void paint(Graphics g, Point mouseLoc){
@@ -33,17 +34,19 @@ public class Stage {
         }
         // state display
         g.setColor(Color.DARK_GRAY);
-        g.drawString(currentState.toString(),720,20);
+        g.drawString(currentState.toString(), 720, 20);
+        g.drawString("health", 720, 45);
+        g.drawString(String.valueOf(Health.get()), 820, 45);
 
         // display cell
         Optional<Cell> cap = grid.cellAtPoint(mouseLoc);
         if (cap.isPresent()){
             Cell capc = cap.get();
             g.setColor(Color.DARK_GRAY);
-            g.drawString(String.valueOf(capc.col) + String.valueOf(capc.row), 720, 50);
-            g.drawString(capc.description, 820, 50);
-            g.drawString("crossing time", 720, 65);
-            g.drawString(String.valueOf(capc.crossingTime()), 820, 65);
+            g.drawString(String.valueOf(capc.col) + String.valueOf(capc.row), 720, 70);
+            g.drawString(capc.description, 820, 70);
+            g.drawString("crossing time", 720, 85);
+            g.drawString(String.valueOf(capc.crossingTime()), 820, 85);
         } 
         // agent display
         int yloc = 138;
