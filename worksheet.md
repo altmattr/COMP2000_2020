@@ -239,3 +239,58 @@ Your job is to create such an iterator.  It must iterate over every cell in the 
 Your boss has suggested the following new gameplay:  When one character moves on top of another, they become "stuck" to each other.  Their `redness` is the average of each `redness` and their `movement` is the minimum of each `movement`.  That "double-character" could then move onto another character to make a "triple-character", etc.  Your boss also thinks that the composite pattern is the way to implement this.
 
 The composite pattern can be quite variable, and it is easy to stray from it in situations where you think it might be useful.  Come up with a design for the above suggestion that _is as close as possible to the composite pattern_.  Explain where it differs and whether you think that matters.  Is your solution a valid composite?
+
+# Task 21
+
+Do you know how the enemies in [mario bros. move along with the music?](https://www.youtube.com/watch?v=nQy-eJALZI0_).  Your team wants something like that for your game.  They want all actors in the game to animate along with a "beat".  All actors should be syncronised and it should be possible to adjust the beat during development so it can sync-up with whatever music gets used.
+
+You have done some thinking and decided that a good solution is to have an `AnimationBeat` class that always knows where you are up to in the beat.  Other objects can query this object to find out where they are up to in the beat and adjust their animation accordingly.
+
+Just like in Mario Bros. the music goes in repeating phases, say one long one, then two short ones.  A colleague has created a basic class that might achieve this
+
+~~~~~
+public class AnimationBeat {
+    private long started;
+    private long a; // length of phase a
+    private long b; // length of phase b
+    private long c; // length of phase c
+   
+    public AnimationBeat(){
+        started = System.currentTimeMillis();
+        this.a = 5000;
+        this.b = 500;
+        this.c = 500;
+    }
+
+    // returns which phase the animation is currently in
+    public char inPhase(){
+        long currTime = System.currentTimeMillis();
+        long rem = (currTime - started) % (a + b + c);
+        if (rem > a + b){
+            return 'c';
+        } else if (rem > a) {
+            return 'b';
+        } else {
+            return 'a';
+        }
+    }
+
+    // returns a number (out of 100) showing the percentage completion of this phase
+    public long phaseCompletion(){ 
+        long currTime = System.currentTimeMillis();
+        long rem = (currTime - started) % (a + b+c);
+        if (rem > a+b){
+            return ((rem -a-b)*100)/c;
+        } else if (rem > a){
+            return ((rem - a)*100)/b;
+        } else {
+            return rem*100/a;
+        }
+
+    }
+}
+~~~~~
+
+Notice that it implements a beat with three phases (`a`, `b`, and `c`) and that phase `a` goes for 5 seconds while phases `b` and `c` go for half-a second each.
+
+Your task is to incorporate this code into the project _using the most appropriate design pattern_ to do so.  You will need to make some changes to your colleague's code to ensure you match the pattern.  Then incorporate the animation beat somewhere in the application to demonstrate that it is working.

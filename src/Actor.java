@@ -13,7 +13,7 @@ public abstract class Actor {
 
     public void paint(Graphics g){
         for(Polygon p: display){
-            g.setColor(new Color(redness, 0f, 1f-redness));
+            g.setColor(new Color(redness, 0f, 1f-redness, AnimationBeat.getInstance().phaseCompletion()/100f));
             g.fillPolygon(p);
             g.setColor(Color.GRAY);
             g.drawPolygon(p);
